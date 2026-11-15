@@ -14,3 +14,4 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+Rails.application.config.i18n.default_locale = :ja
