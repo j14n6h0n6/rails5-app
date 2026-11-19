@@ -36,3 +36,24 @@
 
 # Ignore debugging history
 .byebug_history
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+
+# Environment
+.env
+.env.*
+
+# Database (SQLite)
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Test coverage
+/coverage/
