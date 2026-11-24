@@ -1,8 +1,20 @@
+- if task.errors.present?
+  #error_explanation.alert.alert-danger.alert-dismissible.fade.show role="alert"
+    strong 入力内容を確認してください
+    ul.mb-0.mt-2
+      - task.errors.full_messages.each do |message|
+        li= message
+    button.btn-close type="button" data-bs-dismiss="alert" aria-label="閉じる"
+
 = form_with model: task, local: true do |f|
   .mb-3
     = f.label :name, class: 'form-label'
-    = f.text_field :name, class: 'form-control', id: 'task_name'
+    = f.text_field :name, class: "form-control#{' is-invalid' if task.errors[:name].present?}", id: 'task_name'
+    - if task.errors[:name].present?
+      .invalid-feedback= task.errors[:name].join(', ')
   .mb-3
     = f.label :description, class: 'form-label'
-    = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
+    = f.text_area :description, rows: 5, class: "form-control#{' is-invalid' if task.errors[:description].present?}", id: 'task_description'
+    - if task.errors[:description].present?
+      .invalid-feedback= task.errors[:description].join(', ')
   = f.submit nil, class: 'btn btn-primary'
