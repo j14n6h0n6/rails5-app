@@ -1,2 +1,19 @@
 h1 タスク一覧
-= link_to '新規登録', new_task_path, class: 'btn btn-primary'
+.d-flex.justify-content-end.mb-3
+  = link_to '新規登録', new_task_path, class: 'btn btn-primary'
+
+.table-responsive
+  table.table.table-hover
+    thead
+      tr
+        th scope="col" = Task.human_attribute_name(:name)
+        th scope="col" = Task.human_attribute_name(:created_at)
+        th scope="col"
+    tbody
+      - @tasks.each do |task|
+        tr
+          td= link_to task.name, task_path(task)
+          td.text-nowrap= task.created_at
+          td.text-nowrap
+            = link_to '編集', edit_task_path(task), class: 'btn btn-outline-primary me-2'
+            = link_to '削除', task, method: :delete, data: { confirm: "タスク「#{task.name}」を削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
