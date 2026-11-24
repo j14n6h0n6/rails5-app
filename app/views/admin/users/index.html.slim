@@ -1,0 +1,26 @@
+h1 ユーザー一覧
+
+.d-flex.justify-content-end.mb-3
+  = link_to '新規登録', new_admin_user_path, class: 'btn btn-primary'
+
+.table-responsive
+  table.table.table-hover
+    thead
+      tr
+        th scope="col" = User.human_attribute_name(:name)
+        th scope="col" = User.human_attribute_name(:email)
+        th scope="col" = User.human_attribute_name(:admin)
+        th scope="col" = User.human_attribute_name(:created_at)
+        th scope="col" = User.human_attribute_name(:updated_at)
+        th scope="col"
+    tbody
+      - @users.each do |user|
+        tr
+          td= link_to user.name, [:admin, user]
+          td.text-nowrap= user.email
+          td.text-nowrap= user.admin? ? 'あり' : 'なし'
+          td.text-nowrap= user.created_at
+          td.text-nowrap= user.updated_at
+          td.text-nowrap
+            = link_to '編集', edit_admin_user_path(user), class: 'btn btn-outline-primary me-2'
+            = link_to '削除', [:admin, user], method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？" }, class: 'btn btn-outline-danger'
